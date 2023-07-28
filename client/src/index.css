@@ -28,6 +28,10 @@ a {
   width: 100%;
 }
 
+.wrapper {
+  background-color: white;
+}
+
 .flexCenter {
   display: flex;
   row-gap: 2rem;
