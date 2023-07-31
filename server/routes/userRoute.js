@@ -1,6 +1,5 @@
 import express from "express";
 import {
-  createUser,
   bookVisit,
   getAllBookings,
   toFav,
@@ -10,8 +9,6 @@ import {
 import jwtCheck from "../config/auth0Config.js";
 
 const router = express.Router();
-
-router.post("/register", jwtCheck, createUser);
 
 router.post("/bookVisit/:id", bookVisit);
 

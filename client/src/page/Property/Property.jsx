@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Property.css";
 import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
@@ -6,8 +6,10 @@ import { getProperty } from "../../utils/api";
 import { PuffLoader } from "react-spinners";
 import { AiFillHeart, AiTwotoneCar } from "react-icons/ai";
 import { FaShower } from "react-icons/fa";
+import useAuthCheck from "../../hooks/useAuthCheck";
 import { MdLocationPin, MdMeetingRoom } from "react-icons/md";
 import Map from "../../components/Map/Map";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Property = () => {
   const { pathname } = useLocation();
@@ -16,9 +18,9 @@ const Property = () => {
     getProperty(id)
   );
 
-  console.log("====================================");
-  console.log(data);
-  console.log("====================================");
+  const [modalOpened, setModalOpened] = useState(false);
+  const { validateLogin } = useAuthCheck();
+  const { user } = useAuth0();
 
   if (isLoading) {
     return (
