@@ -1,10 +1,11 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "react-toastify";
+import { useSelector } from "../redux/store";
 
 const useAuthCheck = () => {
-  const { isAuthenticated } = useAuth0();
+  const { currentUser } = useSelector((state) => state.user);
+
   const validateLogin = () => {
-    if (!isAuthenticated) {
+    if (!currentUser) {
       toast.error("you must be logged in", { position: "bottom-right" });
       return false;
     } else return true;

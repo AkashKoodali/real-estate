@@ -11,6 +11,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Property from "./page/Property/Property";
 import UserDetailContext from "./context/UserDetailsContext";
+
+import SignIn from "./page/Auth/SignIn";
+import { useSelector } from "./redux/store";
+// import { useSelector } from "react-redux";
 // import Bookings from "./pages/Bookings/Bookings";
 // import Favourites from "./pages/Favourites/Favourites";
 
@@ -20,8 +24,10 @@ function App() {
   const [userDetails, setUserDetails] = useState({
     favourites: [],
     bookings: [],
-    token: null,
+    // token: null,
   });
+
+  const { currentUser } = useSelector((state) => state.user);
 
   return (
     <UserDetailContext.Provider value={{ userDetails, setUserDetails }}>
@@ -37,6 +43,13 @@ function App() {
                 </Route>
                 {/* <Route path="/bookings" element={<Bookings />} /> */}
                 {/* <Route path="/favourites" element={<Favourites />} /> */}
+              </Route>
+
+              <Route>
+                <Route
+                  path="signin"
+                  element={currentUser ? <MainPage /> : <SignIn />}
+                />
               </Route>
             </Routes>
           </Suspense>

@@ -1,23 +1,35 @@
 import React from "react";
-import { Menu, Button, Text, Avatar } from "@mantine/core";
+import { Menu, Avatar } from "@mantine/core";
+import { logout } from "../../redux/userSlice";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "../../redux/store";
 
-const ProfileMenu = ({ user, logout }) => {
+const ProfileMenu = ({ user }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+      dispatch(logout());
+      localStorage.clear();
+      navigate("/signin");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Menu shadow="md" width={150}>
       <Menu.Target>
-        <Avatar src={user?.picture} alt="user img" radius={"xl"} />
+        <Avatar color="blue" radius="xl">
+          {user.name?.charAt(0).toUpperCase()}
+        </Avatar>
       </Menu.Target>
       <Menu.Dropdown px={5}>
         <Menu.Item>Favourites</Menu.Item>
         <Menu.Item>Bookings</Menu.Item>
-        <Menu.Item
-          onClick={() => {
-            localStorage.clear();
-            logout();
-          }}
-        >
-          Logout
-        </Menu.Item>
+        <Menu.Item onClick={handleLogout}>Logout</Menu.Item>
       </Menu.Dropdown>
     </Menu>
   );

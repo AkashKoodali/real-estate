@@ -50,20 +50,23 @@ export const loginUser = asyncHandler(async (req, res) => {
   });
 
   if (!user)
-    res.send({
+    res.status(400).json({
       message: "User not found",
     });
 
   const isCorrect = await bcrypt.compare(password, user.password);
 
-  if (!isCorrect) res.status(400).send({ message: "Wrong Credentials!" });
+  if (!isCorrect) {
+    return res.status(400).json({ message: "Wrong Credentials!" });
+  } else {
+    const token = jwt.sign({ id: user._id }, process.env.JWT);
 
-  const token = jwt.sign({ id: user._id }, process.env.JWT);
-
-  res
-    .cookie("access_token", token, {
-      httpOnly: true,
-    })
-    .status(200)
-    .json(user);
+    const { password, ...other } = user;
+    return res
+      .cookie("access_token", token, {
+        httpOnly: true,
+      })
+      .status(200)
+      .json({ ...other, token: token });
+  }
 });
