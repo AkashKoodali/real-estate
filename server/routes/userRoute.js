@@ -6,7 +6,7 @@ import {
   cancelBooking,
   getAllFavorites,
 } from "../controller/userCntrl.js";
-import jwtCheck from "../config/auth0Config.js";
+import verifyToken from "../config/verifyToken.js";
 
 const router = express.Router();
 

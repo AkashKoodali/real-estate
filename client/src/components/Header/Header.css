@@ -15,6 +15,9 @@
 }
 .h-menu > *:hover {
   cursor: pointer;
+  transition: ease-out;
+  transform: scale(1.1);
+  color: aliceblue;
 }
 .menu-icon {
   display: none;
