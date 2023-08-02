@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
 import { getProperty } from "../../utils/api";
 import { PuffLoader } from "react-spinners";
-import { AiFillHeart, AiTwotoneCar } from "react-icons/ai";
+import { AiTwotoneCar } from "react-icons/ai";
 import { FaShower } from "react-icons/fa";
 import useAuthCheck from "../../hooks/useAuthCheck";
 import { MdLocationPin, MdMeetingRoom } from "react-icons/md";
@@ -14,6 +14,7 @@ import { useSelector } from "../../redux/store";
 import BookingModal from "../../components/BookingModal/BookingModal";
 import UserDetailContext from "../../context/UserDetailsContext";
 import { Button } from "@mantine/core";
+import Heart from "../../components/Heart/Heart";
 
 const Property = () => {
   const { pathname } = useLocation();
@@ -55,7 +56,7 @@ const Property = () => {
       <div className="flexColStart paddings innerWidth property-container">
         {/* like button */}
         <div className="like">
-          <AiFillHeart size={24} color="white" />
+          <Heart id={id} user={currentUser} />
         </div>
 
         {/* image */}

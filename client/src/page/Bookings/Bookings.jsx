@@ -1,14 +1,17 @@
-import React, { useState } from "react";
-import "./Properties.css";
+import React, { useContext, useState } from "react";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import useProperties from "../../hooks/useProperties";
 import { PuffLoader } from "react-spinners";
 import PropertyCard from "../../components/PropertyCard/PropertyCard";
+import "../Properties/Properties.css";
+import UserDetailContext from "../../context/UserDetailsContext";
 
-const Properties = () => {
+const Bookings = () => {
   const { data, isError, isLoading } = useProperties();
-
   const [filter, setFilter] = useState("");
+  const {
+    userDetails: { bookings },
+  } = useContext(UserDetailContext);
 
   if (isError) {
     return (
@@ -22,8 +25,8 @@ const Properties = () => {
     return (
       <div className="wrapper flexCenter" style={{ height: "60vh" }}>
         <PuffLoader
-          height="80px"
-          width="80px"
+          height="80"
+          width="80"
           radius={1}
           color="#4066ff"
           aria-label="puff-loading"
@@ -41,6 +44,10 @@ const Properties = () => {
             // data.map((card, i)=> (<PropertyCard card={card} key={i}/>))
 
             data
+              .filter((property) =>
+                bookings.map((booking) => booking.id).includes(property.id)
+              )
+
               .filter(
                 (property) =>
                   property.title.toLowerCase().includes(filter.toLowerCase()) ||
@@ -57,4 +64,4 @@ const Properties = () => {
   );
 };
 
-export default Properties;
+export default Bookings;

@@ -2,15 +2,13 @@ import React, { useContext, useEffect } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { Outlet } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
-import UserDetailContext from "../../context/UserDetailsContext";
 import { useMutation } from "react-query";
 import { signUp } from "../../utils/api";
-// import useFavourites from "../../hooks/useFavourites";
+import useFavourites from "../../hooks/useFavourites";
 import useBookings from "../../hooks/useBookings";
 
 const Layout = () => {
-  // useFavourites();
+  useFavourites();
   useBookings();
 
   // const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
