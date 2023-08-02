@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Modal, Button, Container, Stepper } from "@mantine/core";
 import AddLocation from "../AddLocation/AddLocation";
+import UploadImage from "../UploadImage/UploadImage";
+import BasicDetails from "../BasicDetails/BasicDetails";
+import Facilities from "../Facilities/Facilities";
 
 const AddPropertyModal = ({ opened, setOpened, user }) => {
   const [active, setActive] = useState(0);
@@ -44,11 +47,30 @@ const AddPropertyModal = ({ opened, setOpened, user }) => {
               setPropertyDetails={setPropertyDetails}
             />
           </Stepper.Step>
-          <Stepper.Step label="Second step" description="Verify email">
-            Step 2 content: Verify email
+          <Stepper.Step label="Images" description="Upload ">
+            <UploadImage
+              prevStep={prevStep}
+              nextStep={nextStep}
+              propertyDetails={propertyDetails}
+              setPropertyDetails={setPropertyDetails}
+            />
           </Stepper.Step>
-          <Stepper.Step label="Final step" description="Get full access">
-            Step 3 content: Get full access
+          <Stepper.Step label="Basics" description="Details">
+            <BasicDetails
+              prevStep={prevStep}
+              nextStep={nextStep}
+              propertyDetails={propertyDetails}
+              setPropertyDetails={setPropertyDetails}
+            />
+          </Stepper.Step>
+          <Stepper.Step>
+            <Facilities
+              prevStep={prevStep}
+              propertyDetails={propertyDetails}
+              setPropertyDetails={setPropertyDetails}
+              setOpened={setOpened}
+              setActiveStep={setActive}
+            />
           </Stepper.Step>
           <Stepper.Completed>
             Completed, click back button to get to previous step

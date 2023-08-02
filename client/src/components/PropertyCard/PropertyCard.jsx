@@ -3,15 +3,18 @@ import "./PropertyCard.css";
 import { AiFillHeart } from "react-icons/ai";
 import { truncate } from "lodash";
 import { useNavigate } from "react-router-dom";
+import Heart from "../Heart/Heart";
+import { useSelector } from "../../redux/store";
 
 const PropertyCard = ({ card }) => {
   const navigate = useNavigate();
+  const { currentUser } = useSelector((state) => state.user);
   return (
     <div
       className="flexColStart r-card"
       onClick={() => navigate(`../properties/${card.id}`)}
     >
-      <AiFillHeart size={24} color="white" />
+      <Heart id={card?.id} user={currentUser} />
       <img src={card.image} alt="home" />
 
       <span className="secondaryText r-price">

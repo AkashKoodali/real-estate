@@ -27,8 +27,12 @@ const ProfileMenu = ({ user }) => {
         </Avatar>
       </Menu.Target>
       <Menu.Dropdown px={5}>
-        <Menu.Item>Favourites</Menu.Item>
-        <Menu.Item>Bookings</Menu.Item>
+        <Menu.Item onClick={() => navigate("/favourites", { replace: true })}>
+          Favourites
+        </Menu.Item>
+        <Menu.Item onClick={() => navigate("/bookings", { replace: true })}>
+          Bookings
+        </Menu.Item>
         <Menu.Item onClick={handleLogout}>Logout</Menu.Item>
       </Menu.Dropdown>
     </Menu>

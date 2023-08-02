@@ -6,7 +6,7 @@ import {
   cancelBooking,
   getAllFavorites,
 } from "../controller/userCntrl.js";
-import verifyToken from "../config/verifyToken.js";
+// import verifyToken from "../config/verifyToken.js";
 
 const router = express.Router();
 
