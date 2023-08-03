@@ -13,7 +13,7 @@ const ProfileMenu = ({ user }) => {
     try {
       dispatch(logout());
       localStorage.clear();
-      navigate("/signin");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
